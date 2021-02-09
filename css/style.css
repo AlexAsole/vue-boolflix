@@ -1,0 +1,42 @@
+/* UTILITIES */
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+.flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+/* ELEMENTS */
+body {
+    background: firebrick;
+}
+#root{
+    width: 1200px;
+    height: 100vh;
+    margin: 0 auto;
+    background: rgb(40, 139, 233);
+}
+header{
+    width: 100%;
+    height: 90px;
+    background: gold;
+}
+main {
+    width: 100%;
+    height: calc(100% - 90px);
+    overflow-y: auto;
+}
+.movie {
+    width: 150px;
+    height: 320px;
+    background: #fff;
+    margin: 20px;
+}
+.movie > ul {
+    list-style: none;
+}
+.movie > ul > li {
+    margin: 5px 5px 10px 5px;
+}
