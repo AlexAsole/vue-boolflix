@@ -9,10 +9,9 @@
 </head>
 <body>
     <div id='root'>
-        <header>
+        <header class='flex flex-center'>
             <input @keyup.enter='createMoviesList' v-model='searchMovie' type="text">
             <button @click='createMoviesList'>Search</button>
-
         </header>
         <main class='flex'>
             <div class='movie' v-for='movie in movies'>
