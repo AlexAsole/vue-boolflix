@@ -11,20 +11,47 @@
 <body>
     <div id='root'>
         <header class='flex flex-center'>
-            <input @keyup.enter='createMoviesList' v-model='searchMovie' type="text">
-            <button @click='createMoviesList'>Search</button>
+            <input @keyup.enter='createProductsList' v-model='searchProduct' type="text">
+            <button @click='createProductsList'>Search</button>
         </header>
-        <main class='flex'>
-            <div class='movie' v-for='movie in movies'>
-                <ul>
-                    <li>Title: {{movie.title}}</li>
-                    <li>Original Title: {{movie.original_title}}</li>
-                    <li>Original Language: {{movie.original_language}}</li>
-                    <li>Vote: 
-                        <i class="fa fa-star" v-for="n in movie.vote_average" aria-hidden="true"></i>
-                    </li>
-                </ul>
-            </div>
+        <main>
+            <div class="title flex flex-justify">
+                <h2>Movies</h2>  
+             </div> 
+            <div class="container flex">
+                <div class='product' v-for='movie in movies'>
+                    <ul>
+                        <li>Title: {{movie.title}}</li>
+                        <li>Original Title: {{movie.original_title}}</li>
+                        <li>Original Language: 
+                            <img v-if='flags.includes(movie.original_language)' :src="'img/' + movie.original_language + '.png'" alt="">
+                            <span v-else='!flags.includes(movie.original_language)'>{{movie.original_language}}</span>
+                        </li>
+                        <li>Vote: 
+                            <i class="fa fa-star" v-for="n in voteTo5(movie.vote_average)" aria-hidden="true"></i>
+                            <i class="fa fa-star-o" v-for="n in 5 - voteTo5(movie.vote_average)" aria-hidden="true"></i>
+                        </li>
+                    </ul>
+                </div>
+             </div> 
+             <div class="title flex flex-justify">
+                <h2>Tv Series</h2>  
+             </div> 
+            <div class="container flex">
+                <div class='product' v-for='series in tvSeries'>
+                    <ul>
+                        <li>Title: {{series.name}}</li>
+                        <li>Original Title: {{series.original_name}}</li>
+                        <li>Original Language:
+                            <img v-if='flags.includes(series.original_language)' :src="'img/' + series.original_language + '.png'" alt="">
+                            <span v-else='!flags.includes(series.original_language)'>{{series.original_language}}</span> </li>
+                        <li>Vote: 
+                            <i v-for="n in voteTo5(series.vote_average)" class="fa fa-star" aria-hidden="true"></i>
+                            <i v-for="n in 5 - voteTo5(series.vote_average)" class="fa fa-star-o" aria-hidden="true"></i>
+                        </li>
+                    </ul>
+                </div>
+             </div> 
         </main>
     </div>
     <script src='js/script.js' charset='utf-8'></script>

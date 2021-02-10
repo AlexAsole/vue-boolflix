@@ -11,10 +11,15 @@
 .flex-center {
     align-items: center;
 }
+.flex-justify {
+    justify-content: center;
+}
+
 /* ELEMENTS */
 #root{
     width: 100vw;
     height: 100vh;
+    color: #fff;
 }
 header{
     width: 100%;
@@ -35,16 +40,22 @@ main {
     overflow-y: auto;
     background: #000;
 }
-.movie {
+.title {
+    margin-top: 20px;
+}
+.product {
     width: 150px;
     height: 320px;
     background: #1e2d3b;
     margin: 30px;
-    color: #fff;
+
 }
-.movie > ul {
+.product > ul {
     list-style: none;
 }
-.movie > ul > li {
+.product > ul > li {
     margin: 5px 5px 10px 5px;
+}
+.product > ul > li > i {
+    margin-right: 3px;
 }
