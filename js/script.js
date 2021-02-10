@@ -2,7 +2,7 @@ new Vue({
     el:'#root',
     data: {
         movies: [],
-        series: [],
+        tvSeries: [],
         searchProduct: '',
         flags: ['it','cn','de','en','es','fr','ja','ko','ru','pt','nl']
     },
