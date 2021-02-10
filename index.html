@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <script src='https://cdn.jsdelivr.net/npm/vue'></script>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js'></script>
     <link rel='stylesheet' href='css/style.css'>
     <title>Boolflix</title>
@@ -19,14 +20,13 @@
                     <li>Title: {{movie.title}}</li>
                     <li>Original Title: {{movie.original_title}}</li>
                     <li>Original Language: {{movie.original_language}}</li>
-                    <li>Vote: {{movie.vote_average}}</li>
+                    <li>Vote: 
+                        <i class="fa fa-star" v-for="n in movie.vote_average" aria-hidden="true"></i>
+                    </li>
                 </ul>
-
             </div>
         </main>
     </div>
-
-
     <script src='js/script.js' charset='utf-8'></script>
 </body>
 </html>
