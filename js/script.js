@@ -36,6 +36,9 @@ new Vue({
         },
         voteTo5: function(element) {
             return Math.round(element/2)
+        },
+        exist: function(e) {
+            return e.length > 0
         }
     }
 }) 

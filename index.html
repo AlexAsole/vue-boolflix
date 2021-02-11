@@ -19,9 +19,9 @@
         </header>
         <main>
             <div class="title flex flex-justify">
-                <h2>Movies</h2>  
+                <h2 v-if="exist(movies)">Movies</h2>  
              </div> 
-            <div class="container flex">
+            <div class="container-product flex flex-wrap">
                 <div class='product' v-for='movie in movies'>
                     <img v-if="movie.poster_path" :src="'https://image.tmdb.org/t/p/w342' + movie.poster_path" alt="">
                     <img v-else src="img/placeholder.png" alt="">
@@ -44,9 +44,9 @@
                 </div>
              </div> 
              <div class="title flex flex-justify">
-                <h2>Tv Series</h2>  
+                <h2 v-if="exist(tvSeries)">Tv Series</h2>  
              </div> 
-            <div class="container flex">
+            <div class="container-product flex flex-wrap">
                 <div class='product' v-for='series in tvSeries'>
                     <img v-if='series.poster_path' :src="'https://image.tmdb.org/t/p/w342' + series.poster_path" alt="">
                     <img v-else src="img/placeholder.png" alt="">

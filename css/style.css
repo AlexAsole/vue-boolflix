@@ -65,13 +65,10 @@ main {
 .title {
     margin-top: 20px;
 }
-.container {
-    overflow-x: auto;
-}
 .product {
     width: 342px;
     background: #1e2d3b;
-    margin: 10px;
+    margin: 10px 10px 10px 20px;
     position: relative;
 }
 .product > ul {
