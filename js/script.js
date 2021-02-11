@@ -13,7 +13,8 @@ new Vue({
                 .get('https://api.themoviedb.org/3/search/movie' ,{
                     params:{
                         api_key : 'beb26a5871cd03140d2c6b0bb0463b7e',
-                        query : self.searchProduct
+                        query : self.searchProduct,
+                        language: 'it'
                     }
                 })
                 .then(function (resp) {
@@ -24,13 +25,14 @@ new Vue({
                 .get('https://api.themoviedb.org/3/search/tv', {
                     params: {
                         api_key: 'beb26a5871cd03140d2c6b0bb0463b7e',
-                        query: self.searchProduct
+                        query: self.searchProduct,
+                        language: 'it'
                     }
                 })
                 .then(function (resp) {
-                    self.tvSeries = resp.data.results;
-                    self.searchProduct = '';
-                })
+                        self.tvSeries = resp.data.results;
+                        self.searchProduct = '';
+                    })
         },
         voteTo5: function(element) {
             return Math.round(element/2)

@@ -10,9 +10,12 @@
 </head>
 <body>
     <div id='root'>
-        <header class='flex flex-center'>
-            <input @keyup.enter='createProductsList' v-model='searchProduct' type="text">
-            <button @click='createProductsList'>Search</button>
+        <header class='flex flex-center flex-between'>
+            <img src="img/logo.png" alt="">
+            <div class="search-container">
+                <input @keyup.enter='createProductsList' v-model='searchProduct' type="text">
+                <button @click='createProductsList'><i class="fa fa-search" aria-hidden="true"></i></button>
+            </div>
         </header>
         <main>
             <div class="title flex flex-justify">
@@ -20,16 +23,22 @@
              </div> 
             <div class="container flex">
                 <div class='product' v-for='movie in movies'>
-                    <ul>
-                        <li>Title: {{movie.title}}</li>
-                        <li>Original Title: {{movie.original_title}}</li>
-                        <li>Original Language: 
+                    <img v-if="movie.poster_path" :src="'https://image.tmdb.org/t/p/w342' + movie.poster_path" alt="">
+                    <img v-else src="img/placeholder.png" alt="">
+                    <ul class="back-black">     
+                        <li>Titolo: {{movie.title}}</li>
+                        <li>Titolo originale: {{movie.original_title}}</li>
+                        <li class='flex flex-center'>Lingua originale: 
                             <img v-if='flags.includes(movie.original_language)' :src="'img/' + movie.original_language + '.png'" alt="">
-                            <span v-else='!flags.includes(movie.original_language)'>{{movie.original_language}}</span>
+                            <span v-else>{{movie.original_language}}</span>
                         </li>
-                        <li>Vote: 
+                        <li>Voto: 
                             <i class="fa fa-star" v-for="n in voteTo5(movie.vote_average)" aria-hidden="true"></i>
                             <i class="fa fa-star-o" v-for="n in 5 - voteTo5(movie.vote_average)" aria-hidden="true"></i>
+                        </li>
+                        <li>Trama: <br>
+                            <span v-if="movie.overview">{{movie.overview}}</span>
+                            <span v-else>Non disponibile</span>
                         </li>
                     </ul>
                 </div>
@@ -39,15 +48,21 @@
              </div> 
             <div class="container flex">
                 <div class='product' v-for='series in tvSeries'>
+                    <img v-if='series.poster_path' :src="'https://image.tmdb.org/t/p/w342' + series.poster_path" alt="">
+                    <img v-else src="img/placeholder.png" alt="">
                     <ul>
-                        <li>Title: {{series.name}}</li>
-                        <li>Original Title: {{series.original_name}}</li>
-                        <li>Original Language:
+                        <li>Titolo: {{series.name}}</li>
+                        <li>Titolo originale: {{series.original_name}}</li>
+                        <li class='flex flex-center'>Lingua originale:
                             <img v-if='flags.includes(series.original_language)' :src="'img/' + series.original_language + '.png'" alt="">
-                            <span v-else='!flags.includes(series.original_language)'>{{series.original_language}}</span> </li>
-                        <li>Vote: 
+                            <span v-else>{{series.original_language}}</span> </li>
+                        <li>Voto: 
                             <i v-for="n in voteTo5(series.vote_average)" class="fa fa-star" aria-hidden="true"></i>
                             <i v-for="n in 5 - voteTo5(series.vote_average)" class="fa fa-star-o" aria-hidden="true"></i>
+                        </li>
+                        <li>Trama: <br>
+                            <span v-if="series.overview">{{series.overview}}</span>
+                            <span v-else>Non disponibile</span>
                         </li>
                     </ul>
                 </div>
