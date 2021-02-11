@@ -11,6 +11,7 @@ new Vue({
     methods: {
         createProductsList: function() {
             const self = this;
+            self.combined = [];
             axios
                 .get('https://api.themoviedb.org/3/search/movie' ,{
                     params:{
@@ -46,6 +47,17 @@ new Vue({
         },
         sameTitle: function(e) {
             return e.title !== e.original_title
+        },
+        typeOfSearch: function() {
+            if (this.type === 'Totale') {
+                return this.combined
+            }
+            if (this.type === 'Film') {
+                return this.movies
+            }
+            if (this.type === 'Serie TV') {
+                return this.tvSeries
+            }
         }
     }
 }) 
