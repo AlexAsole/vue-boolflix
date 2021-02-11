@@ -38,7 +38,7 @@ header > img {
 .search-container {
     margin-right: 30px;
 }
-input {
+input, select {
     margin: 30px;
     border: none;
     height: 30px;
@@ -56,6 +56,9 @@ button {
     background: #000;
     color: #fff;
 }
+select {
+    width: 100px;
+}
 main {
     width: 100%;
     height: calc(100% - 60px);
@@ -64,6 +67,9 @@ main {
 }
 .title {
     margin-top: 20px;
+}
+.logo > img {
+    width: 500px;
 }
 .product {
     width: 342px;
@@ -89,4 +95,3 @@ main {
 .product > ul > li > i {
     margin-right: 3px;
 }
-.product > ul > li > 

@@ -9,24 +9,71 @@
     <title>Boolflix</title>
 </head>
 <body>
+    <!-- ROOT CONTAINER -->
     <div id='root'>
+        <!-- HEADER -->
         <header class='flex flex-center flex-between'>
             <img src="img/logo.png" alt="">
             <div class="search-container">
                 <input @keyup.enter='createProductsList' v-model='searchProduct' type="text">
                 <button @click='createProductsList'><i class="fa fa-search" aria-hidden="true"></i></button>
+                <select v-model="type">
+                    <option>Totale</option>
+                    <option>Film</option>
+                    <option>Serie TV</option>
+                </select>
             </div>
         </header>
+        <!-- END HEADER -->
+        <!-- MAIN -->
         <main>
-            <div class="title flex flex-justify">
-                <h2 v-if="exist(movies)">Movies</h2>  
+            <!-- LOGO -->
+            <div class="logo flex flex-justify">
+                <img src="img/logo.png" v-if="!exist(combined)">  
              </div> 
+             <!-- END LOGO -->
+             <!-- COMBINED -->
+            <div class="title flex flex-justify">
+                <h2 v-if="exist(combined) && type === 'Totale'">Totale</h2>  
+             </div> 
+             <!-- CONTAINER COMBINED -->
             <div class="container-product flex flex-wrap">
-                <div class='product' v-for='movie in movies'>
+                <div class='product' v-for='product in combined' v-if="type === 'Totale'">
+                    <img v-if="product.poster_path" :src="'https://image.tmdb.org/t/p/w342' + product.poster_path" alt="">
+                    <img v-else src="img/placeholder.png" alt="">
+                    <ul class="back-black">     
+                        <li v-if="product.title && sameTitle(product)">Titolo: {{product.title}}</li>
+                        <li v-if="product.name && sameTitle(product)">Titolo: {{product.name}}</li>
+                        <li v-if="product.original_title">Titolo originale: {{product.original_title}}</li>
+                        <li v-if="product.original_name">Titolo originale: {{product.original_name}}</li>
+                        <li class='flex flex-center'>Lingua originale: 
+                            <img v-if='flags.includes(product.original_language)' :src="'img/' + product.original_language + '.png'" alt="">
+                            <span v-else>{{product.original_language}}</span>
+                        </li>
+                        <li>Voto: 
+                            <i class="fa fa-star" v-for="n in voteTo5(product.vote_average)" aria-hidden="true"></i>
+                            <i class="fa fa-star-o" v-for="n in 5 - voteTo5(product.vote_average)" aria-hidden="true"></i>
+                        </li>
+                        <li>Trama: <br>
+                            <span v-if="product.overview">{{product.overview}}</span>
+                            <span v-else>Non disponibile</span>
+                        </li>
+                    </ul>
+                </div>
+             </div> 
+             <!-- END CONTAINER COMBINED -->
+             <!-- END COMBINED -->
+             <!-- FILM -->
+            <div class="title flex flex-justify">
+                <h2 v-if="exist(movies) && type ===  'Film'">Film</h2>  
+             </div> 
+             <!-- CONTAINER FILM -->
+            <div class="container-product flex flex-wrap">
+                <div class='product' v-if="type === 'Film'" v-for='movie in movies'>
                     <img v-if="movie.poster_path" :src="'https://image.tmdb.org/t/p/w342' + movie.poster_path" alt="">
                     <img v-else src="img/placeholder.png" alt="">
                     <ul class="back-black">     
-                        <li>Titolo: {{movie.title}}</li>
+                        <li v-if="sameTitle(movie)">Titolo: {{movie.title}}</li>
                         <li>Titolo originale: {{movie.original_title}}</li>
                         <li class='flex flex-center'>Lingua originale: 
                             <img v-if='flags.includes(movie.original_language)' :src="'img/' + movie.original_language + '.png'" alt="">
@@ -43,15 +90,19 @@
                     </ul>
                 </div>
              </div> 
+             <!-- END CONTAINER FILM -->
+             <!-- END FILM -->
+             <!-- SERIE TV -->
              <div class="title flex flex-justify">
-                <h2 v-if="exist(tvSeries)">Tv Series</h2>  
+                <h2 v-if="exist(tvSeries) && type === 'Serie TV'">Tv Series</h2>  
              </div> 
+             <!-- CONTAINER SERIE TV -->
             <div class="container-product flex flex-wrap">
-                <div class='product' v-for='series in tvSeries'>
+                <div class='product' v-if="type === 'Serie TV'" v-for='series in tvSeries'>
                     <img v-if='series.poster_path' :src="'https://image.tmdb.org/t/p/w342' + series.poster_path" alt="">
                     <img v-else src="img/placeholder.png" alt="">
                     <ul>
-                        <li>Titolo: {{series.name}}</li>
+                        <li v-if="sameTitle(series)">Titolo: {{series.name}}</li>
                         <li>Titolo originale: {{series.original_name}}</li>
                         <li class='flex flex-center'>Lingua originale:
                             <img v-if='flags.includes(series.original_language)' :src="'img/' + series.original_language + '.png'" alt="">
@@ -67,8 +118,12 @@
                     </ul>
                 </div>
              </div> 
+             <!-- END CONTAINER SERIE TV -->
+             <!-- END SERIE TV -->
         </main>
+        <!-- END MAIN -->
     </div>
+    <!-- END ROOT CONTAINER -->
     <script src='js/script.js' charset='utf-8'></script>
 </body>
 </html>

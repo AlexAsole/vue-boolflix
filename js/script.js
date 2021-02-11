@@ -1,9 +1,11 @@
 new Vue({
     el:'#root',
     data: {
+        combined: [],
         movies: [],
         tvSeries: [],
         searchProduct: '',
+        type: 'Totale',
         flags: ['it','cn','de','en','es','fr','ja','ko','ru','pt','nl']
     },
     methods: {
@@ -19,6 +21,7 @@ new Vue({
                 })
                 .then(function (resp) {
                         self.movies = resp.data.results;
+                        self.combined = [...self.combined, ...self.movies]
                         self.searchProduct = '';
                     })
             axios
@@ -31,6 +34,7 @@ new Vue({
                 })
                 .then(function (resp) {
                         self.tvSeries = resp.data.results;
+                        self.combined = [...self.combined, ...self.tvSeries]
                         self.searchProduct = '';
                     })
         },
@@ -39,6 +43,9 @@ new Vue({
         },
         exist: function(e) {
             return e.length > 0
+        },
+        sameTitle: function(e) {
+            return e.title !== e.original_title
         }
     }
 }) 
