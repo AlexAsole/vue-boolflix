@@ -61,7 +61,7 @@
                         <li>
                             <span>Cast: <br></span>
                             <span v-for='actor in actors' v-if='actors.length > 0'>{{actor}}<br></span>
-                            <span v-else>Non disponibile<br></span>
+                            <span v-if='actors.length === 0'>Non disponibile<br></span>
                         </li>
                     </ul>
                 </div>
