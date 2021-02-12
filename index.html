@@ -38,8 +38,8 @@
              </div> 
             <!-- CONTAINER -->
             <div class="container-product flex flex-wrap">
-                <div class='product' v-for="product in typeOfSearch()">
-                    <img v-if="product.poster_path" :src="'https://image.tmdb.org/t/p/w342' + product.poster_path" alt="">
+                <div class='product' v-for="product in typeOfSearch()" @mouseenter="searchActor(product)">
+                    <img v-if="product.poster_path" :src="loadPoster(product)" alt="">
                     <img v-else src="img/placeholder.png" alt="">
                     <ul class="back-black">     
                         <li v-if="product.title && sameTitle(product)">Titolo: {{product.title}}</li>
@@ -47,7 +47,7 @@
                         <li v-if="product.original_title">Titolo originale: {{product.original_title}}</li>
                         <li v-if="product.original_name">Titolo originale: {{product.original_name}}</li>
                         <li class='flex flex-center'>Lingua originale: 
-                            <img v-if='flags.includes(product.original_language)' :src="'img/' + product.original_language + '.png'" alt="">
+                            <img v-if='flags.includes(product.original_language)' :src="loadFlag(product)">
                             <span v-else>{{product.original_language}}</span>
                         </li>
                         <li>Voto: 
@@ -55,8 +55,13 @@
                             <i class="fa fa-star-o" v-for="n in 5 - voteTo5(product.vote_average)" aria-hidden="true"></i>
                         </li>
                         <li>Trama: <br>
-                            <span v-if="product.overview">{{product.overview}}</span>
+                            <span v-if="product.overview">{{truncateString(product.overview, 160)}}</span>
                             <span v-else>Non disponibile</span>
+                        </li>
+                        <li>
+                            <span>Cast: <br></span>
+                            <span v-for='actor in actors' v-if='actors.length > 0'>{{actor}}<br></span>
+                            <span v-else>Non disponibile<br></span>
                         </li>
                     </ul>
                 </div>
