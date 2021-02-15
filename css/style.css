@@ -3,6 +3,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    font-family: Roboto;
 }
 .flex {
     display: flex;
@@ -92,6 +93,9 @@ main {
 .product > ul > li {
     margin: 5px 5px 10px 5px;
 }
-.product > ul > li > i {
-    margin-right: 3px;
+.product > ul > li > span > i {
+    margin-left: 3px;
+}
+.stars {
+    color: #ffd700;
 }

@@ -5,6 +5,8 @@
     <script src='https://cdn.jsdelivr.net/npm/vue'></script>
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js'></script>
+    <link rel='preconnect' href='https://fonts.gstatic.com'>
+    <link href='https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap' rel='stylesheet'>
     <link rel='stylesheet' href='css/style.css'>
     <title>Boolflix</title>
 </head>
@@ -50,9 +52,16 @@
                             <img v-if='flags.includes(product.original_language)' :src="loadFlag(product)">
                             <span v-else>{{product.original_language}}</span>
                         </li>
-                        <li>Voto: 
-                            <i class="fa fa-star" v-for="n in voteTo5(product.vote_average)" aria-hidden="true"></i>
-                            <i class="fa fa-star-o" v-for="n in 5 - voteTo5(product.vote_average)" aria-hidden="true"></i>
+                        <li class="flex">Voto: 
+                            <span class="stars"><i class="fa fa-star" v-for="n in voteTo5(product.vote_average)" aria-hidden="true"></i></span>
+                            <span class="stars"><i class="fa fa-star-o" v-for="n in 5 - voteTo5(product.vote_average)" aria-hidden="true"></i></span>
+                        </li>
+                        <li>Generi:    
+                            <div v-for="genreId in product.genre_ids">
+                                <span>
+                                    {{printGenres(genreId)}}<br>
+                                </span>
+                            </div>
                         </li>
                         <li>Trama: <br>
                             <span v-if="product.overview">{{truncateString(product.overview, 160)}}</span>
